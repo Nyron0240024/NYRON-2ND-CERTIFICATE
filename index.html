@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYRON — 2-O‘RIN</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 20%, #302000 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, #211600 0%, transparent 30%),
+                #050505;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .certificate {
+            width: min(1100px, 100%);
+            min-height: 700px;
+            position: relative;
+            overflow: hidden;
+            padding: 55px;
+            border: 2px solid #b8b8b8;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.04), transparent 35%),
+                linear-gradient(315deg, rgba(255,255,255,.06), transparent 40%),
+                #0b0b0b;
+            box-shadow:
+                0 0 40px rgba(190,190,190,.12),
+                inset 0 0 50px rgba(190,190,190,.04);
+        }
+
+        .certificate::before {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border: 1px solid rgba(190,190,190,.45);
+            pointer-events: none;
+        }
+
+        .top {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand {
+            color: #d0d0d0;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 7px;
+        }
+
+        h1 {
+            margin: 25px 0 8px;
+            font-size: clamp(45px, 7vw, 82px);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #d0d0d0;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .divider {
+            width: 180px;
+            height: 2px;
+            background: #b8b8b8;
+            margin: 28px auto;
+        }
+
+        .team-label {
+            color: #aaa;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .team-name {
+            margin-top: 12px;
+            font-size: clamp(30px, 5vw, 58px);
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .achievement {
+            margin-top: 25px;
+            font-size: 20px;
+            color: #ddd;
+        }
+
+        .prize {
+            margin: 30px auto;
+            width: fit-content;
+            padding: 14px 35px;
+            border: 1px solid #b8b8b8;
+            background: rgba(190,190,190,.07);
+            color: #e0e0e0;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .journey {
+            margin-top: 25px;
+            padding: 18px;
+            border: 1px solid rgba(190,190,190,.35);
+            background: rgba(190,190,190,.035);
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-title {
+            color: #d0d0d0;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .journey-placeholder {
+            margin-top: 10px;
+            text-align: center;
+            color: #777;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .info {
+            margin-top: 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .box {
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,.15);
+            background: rgba(255,255,255,.025);
+        }
+
+        .box-title {
+            color: #d0d0d0;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .box-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .qr-section {
+    text-align: center;
+}
+
+#qrcode {
+    display: inline-block;
+    padding: 8px;
+    background: white;
+    border: 2px solid #b8b8b8;
+}
+
+#qrcode img {
+    display: block;
+}
+
+.qr-label {
+    margin-top: 8px;
+    color: #d0d0d0;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+        .footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            position: relative;
+            z-index: 2;
+        }
+
+        .signature {
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .certificate-id {
+            text-align: right;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .certificate-id strong {
+            display: block;
+            color: #d0d0d0;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .corner {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-color: #b8b8b8;
+            opacity: .8;
+        }
+
+        .corner.tl {
+            top: 28px;
+            left: 28px;
+            border-top: 2px solid;
+            border-left: 2px solid;
+        }
+
+        .corner.tr {
+            top: 28px;
+            right: 28px;
+            border-top: 2px solid;
+            border-right: 2px solid;
+        }
+
+        .corner.bl {
+            bottom: 28px;
+            left: 28px;
+            border-bottom: 2px solid;
+            border-left: 2px solid;
+        }
+
+        .corner.br {
+            bottom: 28px;
+            right: 28px;
+            border-bottom: 2px solid;
+            border-right: 2px solid;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .certificate {
+                padding: 35px 25px;
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 25px;
+            }
+
+            .certificate-id {
+                text-align: left;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    
+</head>
+
+<body>
+
+    <div class="certificate">
+
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <div class="top">
+
+            <div class="brand">
+                NYRON TOURNAMENT
+            </div>
+
+            <h1>2ND PLACE</h1>
+
+            <div class="subtitle">
+                2-O‘RIN
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="team-label">
+                FINALIST JAMOA
+            </div>
+
+            <div class="team-name">
+                TEAM NAME
+            </div>
+
+            <div class="achievement">
+                NYRON MLBB MINI TOURNAMENT’da
+                <strong>2-o‘rin</strong> egallagani uchun taqdim etiladi.
+            </div>
+
+            <div class="prize">
+                🥈 PRIZE: 1720 💎
+            </div>
+
+        </div>
+
+        <div class="journey">
+
+            <div class="journey-title">
+                🏆 TURNIR YO‘LI
+            </div>
+
+            <div class="journey-placeholder">
+                MATCH RESULTS WILL BE ADDED AFTER THE TOURNAMENT
+            </div>
+
+        </div>
+
+        <div class="info">
+
+            <div class="box">
+                <div class="box-title">
+                    TURNIR
+                </div>
+
+                <div class="box-value">
+                    NYRON MLBB MINI TOURNAMENT
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-title">
+                    NATIJA
+                </div>
+
+                <div class="box-value">
+                    2-O‘RIN — FINALIST
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-title">
+                    JAMOA A'ZOLARI
+                </div>
+
+                <div class="box-value">
+                    PLAYER 1 • PLAYER 2 • PLAYER 3 • PLAYER 4 • PLAYER 5
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-title">
+                    SANA
+                </div>
+
+                <div class="box-value">
+                    TOURNAMENT DATE
+                </div>
+            </div>
+
+        </div>
+
+      <div class="footer">
+
+    <div class="signature">
+        Official Organizer<br>
+        <strong>NYRON GROUP × DELPAN FAMILY</strong>
+    </div>
+
+    <div class="qr-section">
+        <div id="qrcode"></div>
+        <div class="qr-label">VERIFY CERTIFICATE</div>
+    </div>
+
+    <div class="certificate-id">
+        CERTIFICATE ID
+        <strong>NYRON-2026-002</strong>
+    </div>
+
+</div>
+
+    </div>
+    <script>
+    new QRCode(document.getElementById("qrcode"), {
+        text: "https://nyron0240024.github.io/NYRON-2ND-CERTIFICATE/verify.html",
+        width: 110,
+        height: 110,
+        colorDark: "#000000",
+        colorLight: "#ffffff"
+    });
+</script>
+
+</body>
+</html>
